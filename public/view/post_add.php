@@ -20,12 +20,13 @@ if (@$_POST['submit']) {
 
     // バリデーションチェック
     $postValidation = new PostValidation();
-    $errors = $postValidation->addValidation($title, $description,$categoryId);
+    $errors = $postValidation->addValidation($title, $description, $categoryId);
 
     // バリデーションエラーがない場合
     if (count($errors) === 0) {
+        // DBに登録する
         $postModel = new PostModel();
-        $postModel->add($title, $description,$categoryId);
+        $postModel->add($title, $description, $categoryId);
         header('Location: /blog_intern');
         exit();
     }
@@ -75,7 +76,9 @@ if (@$_POST['submit']) {
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
         <a class="navbar-brand" href="/blog_intern">Re:Build</a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
             Menu
             <i class="fa fa-bars"></i>
         </button>
@@ -89,7 +92,8 @@ if (@$_POST['submit']) {
                 </li>
                 <li class="nav-item">
                     <div class="btn-group">
-                         <span style="color: white; font-size: 13px; margin-right: 20px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         <span style="color: white; font-size: 13px; margin-right: 20px;" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
                             ブログ管理
                         </span>
                         <div class="dropdown-menu">
@@ -101,7 +105,8 @@ if (@$_POST['submit']) {
                 </li>
                 <li class="nav-item">
                     <div class="btn-group">
-                        <span style="color: white; font-size: 13px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span style="color: white; font-size: 13px;" data-toggle="dropdown" aria-haspopup="true"
+                              aria-expanded="false">
                             カテゴリ管理
                         </span>
                         <div class="dropdown-menu">
@@ -139,7 +144,7 @@ if (@$_POST['submit']) {
         <div class="col-lg-8 col-md-10 mx-auto">
             <form method="post" action="post_add.php">
                 <div class="post">
-                    <?php if(count($errors) > 0) { ?>
+                    <?php if (count($errors) > 0) { ?>
                         <?php foreach ($errors as $error) { ?>
                             <p class="error-message"><?php echo $error ?></p>
                         <?php } ?>
@@ -153,7 +158,7 @@ if (@$_POST['submit']) {
                     <p>カテゴリ</p>
                     <select name="category" class="form-control">
                         <?php
-                        foreach ( $categories as $category ) {
+                        foreach ($categories as $category) {
                             echo '<option value="', $category['id'], '">', $category['name'], '</option>';
                         }
                         ?>
