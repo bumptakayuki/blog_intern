@@ -41,7 +41,7 @@ ini_set('display_errors', 1);
                 <p class="error"><?php echo isset($errors['password']) ? $errors['password'] :''; ?></p>
             </div>
             <p><input class="btn btn-primary" name="submit" type="submit" value="ログイン"></p>
-            <a href="user_add.php">会員登録はこちら</a>
+            <a href="./user/add">会員登録はこちら</a>
         </form>
     </div><!-- /card-container -->
 </div><!-- /container -->

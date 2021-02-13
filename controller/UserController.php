@@ -1,5 +1,8 @@
 <?php
 require_once('./model/UserModel.php');
+require_once('./model/UserModel.php');
+require_once('./service/validation/UserValidation.php');
+
 
 /**
  * Class UserController
@@ -17,6 +20,28 @@ class UserController
      * ユーザ登録
      */
     public function addAction(){
+
+        $errors = [];
+
+        if (@$_POST['submit']) {
+
+            $username = $_POST['username'];
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+
+            // バリデーションチェック
+            $userValidation = new UserValidation();
+            $errors = $userValidation->addValidation($username);
+
+            // バリデーションエラーがない場合
+            if (count($errors) === 0) {
+                $userModel = new UserModel();
+                $userModel->add($username, $email,$password);
+                header("Location: ../login");
+                exit();
+            }
+        }
+
         require("./public/view/user_add.php");
     }
 
