@@ -1,6 +1,6 @@
 <?php
 require_once ('Controller.php');
-
+require_once ('./model/PostModel.php');
 
 /**
  * Class PostController
@@ -18,10 +18,11 @@ class PostController extends Controller
     /**
      * 記事一覧
      */
-    public function indexAction(){
-
-        header("Location: ./public/view/post_index.php");
-        exit;
+    public function indexAction()
+    {
+        $postModel = new PostModel();
+        $posts = $postModel->get();
+        require("./public/view/post_index.php");
     }
 
     /**

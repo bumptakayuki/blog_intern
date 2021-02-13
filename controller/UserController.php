@@ -17,9 +17,7 @@ class UserController
      * ユーザ登録
      */
     public function addAction(){
-
-        header("Location: ./public/view/user_add.php");
-        exit;
+        require("./public/view/user_add.php");
     }
 
     /**
@@ -40,7 +38,6 @@ class UserController
                 if(count($user) > 0){
 
                     $_SESSION['user'] = $user;
-
                     header("Location: /blog_intern");
 
                 }else{
@@ -58,8 +55,6 @@ class UserController
     public function logoutAction(){
         session_destroy();
         unset($_SESSION['user']);
-        header("Location: /blog_intern/public/view/login.php");
-        exit;
+        require("./public/view/login.php");
     }
-
 }
