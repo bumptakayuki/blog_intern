@@ -48,9 +48,6 @@ ini_set('display_errors', "On");
                     <a class="nav-link" href="/blog_intern">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="about.php">About</a>
-                </li>
-                <li class="nav-item">
                     <div class="btn-group">
                          <span style="color: white; font-size: 13px; margin-right: 20px;" data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false">
