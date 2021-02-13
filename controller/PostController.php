@@ -1,6 +1,10 @@
 <?php
+ini_set('display_errors', "On");
 require_once ('Controller.php');
 require_once ('./model/PostModel.php');
+require_once('./model/PostModel.php');
+require_once('./model/CategoryModel.php');
+require_once('./service/validation/PostValidation.php');
 
 /**
  * Class PostController
@@ -30,8 +34,31 @@ class PostController extends Controller
      */
     public function addAction(){
 
-        header("Location: /blog_intern/public/view/post_add.php");
-        exit;
-    }
+        $categoryModel = new CategoryModel();
+        $categories = $categoryModel->getAll();
+        $errors = [];
+        $title = '';
+        $description = '';
 
+        if (@$_POST['submit']) {
+
+            $title = $_POST['title'];
+            $description = $_POST['description'];
+            $categoryId = $_POST['category'];
+
+            // バリデーションチェック
+            $postValidation = new PostValidation();
+            $errors = $postValidation->addValidation($title, $description, $categoryId);
+
+            // バリデーションエラーがない場合
+            if (count($errors) === 0) {
+                // DBに登録する
+                $postModel = new PostModel();
+                $postModel->add($title, $description, $categoryId);
+                header('Location: /blog_intern');
+                exit();
+            }
+        }
+        require("./public/view/post_add.php");
+    }
 }
