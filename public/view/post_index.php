@@ -164,9 +164,7 @@ ini_set('display_errors', "On");
 
 <!-- Custom scripts for this template -->
 <script src="../js/clean-blog.min.js"></script>
-
 </body>
-
 </html>
 
 

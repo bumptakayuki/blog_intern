@@ -25,7 +25,7 @@ ini_set('display_errors', "On");
     <link href="../public/css/clean-blog.min.css" rel="stylesheet">
 
     <style>
-        .error-message {
+        .error {
             color: red;
         }
     </style>
@@ -39,12 +39,15 @@ ini_set('display_errors', "On");
                 <h1>会員登録フォーム</h1>
                 <div class="form-group">
                     <input type="text" class="form-control" name="username" placeholder="ユーザー名" required/>
+                    <p class="error"><?php echo isset($errors['username']) ? $errors['username'] :''; ?></p>
                 </div>
                 <div class="form-group">
                     <input type="email" class="form-control" name="email" placeholder="メールアドレス" required/>
+                    <p class="error"><?php echo isset($errors['email']) ? $errors['email'] :''; ?></p>
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" name="password" placeholder="パスワード" required/>
+                    <p class="error"><?php echo isset($errors['password']) ? $errors['password'] :''; ?></p>
                 </div>
                 <p><input class="btn btn-primary" name="submit" type="submit" value="会員登録"></p>
                 <a href="../login">ログインはこちら</a>

@@ -45,6 +45,17 @@ class UserModel extends Model
         }
     }
 
+    // 一致するEMAILをカウント
+    public function count_email(array $data): int
+    {
+        $sql = 'SELECT count(*) FROM users WHERE email = :email';
+        $sth = $this -> pdo -> prepare($sql);
+        $sth -> bindValue (':email' , $data['email']);
+        $sth -> execute();
+        $count = $sth -> fetchColumn();
+        return $count;
+    }
+
     /**
      * @param $email
      * @param $password
