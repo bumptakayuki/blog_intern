@@ -13,7 +13,7 @@ abstract class Controller
     function __construct()
     {
         if(empty($_SESSION['user'])) {
-            header("Location: ./public/view/login.php");
+            header("Location: ./login");
             exit;
         }
     }
