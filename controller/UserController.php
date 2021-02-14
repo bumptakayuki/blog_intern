@@ -1,8 +1,6 @@
 <?php
 require_once('./model/UserModel.php');
 require_once('./model/UserModel.php');
-require_once('./service/validation/UserValidation.php');
-
 
 /**
  * Class UserController
@@ -30,8 +28,7 @@ class UserController
             $password = $_POST['password'];
 
             // バリデーションチェック
-            $userValidation = new UserValidation();
-            $errors = $userValidation->addValidation($username);
+            $errors = $this->addValidation($username);
 
             // バリデーションエラーがない場合
             if (count($errors) === 0) {
@@ -81,5 +78,22 @@ class UserController
         session_destroy();
         unset($_SESSION['user']);
         require("./public/view/login.php");
+    }
+
+    /**
+     * @param $name
+     * @return array
+     */
+    private function addValidation($name){
+
+        $errors = [];
+
+        if (empty($name)){
+            $errors['username'] = 'カテゴリ名がありません。<br>';
+        }
+        if (mb_strlen($name) > 80){
+            $errors['username'] = 'カテゴリ名が長すぎます。<br>';
+        }
+        return $errors;
     }
 }

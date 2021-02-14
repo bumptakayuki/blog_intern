@@ -4,7 +4,6 @@ require_once ('Controller.php');
 require_once ('./model/PostModel.php');
 require_once('./model/PostModel.php');
 require_once('./model/CategoryModel.php');
-require_once('./service/validation/PostValidation.php');
 
 /**
  * Class PostController
@@ -47,8 +46,7 @@ class PostController extends Controller
             $categoryId = $_POST['category'];
 
             // バリデーションチェック
-            $postValidation = new PostValidation();
-            $errors = $postValidation->addValidation($title, $description, $categoryId);
+            $errors = $this->addValidation($title, $description, $categoryId);
 
             // バリデーションエラーがない場合
             if (count($errors) === 0) {
@@ -60,5 +58,27 @@ class PostController extends Controller
             }
         }
         require("./public/view/post_add.php");
+    }
+
+    /**
+     * @param $title
+     * @param $description
+     * @param $categoryId
+     * @return array
+     */
+    private function addValidation($title, $description, $categoryId){
+
+        $errors = [];
+
+        if (empty($title)){
+            $errors['title'] = 'タイトルがありません。<br>';
+        }
+        if (mb_strlen($title) > 80){
+            $errors['title'] = 'タイトルが長すぎます。<br>';
+        }
+        if (empty($description)){
+            $errors['description'] = '本文がありません。<br>';
+        }
+        return $errors;
     }
 }

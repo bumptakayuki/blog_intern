@@ -1,7 +1,6 @@
 <?php
 require_once ('Controller.php');
 require_once('./model/CategoryModel.php');
-require_once('./service/validation/CategoryValidation.php');
 
 /**
  * Class CategoryController
@@ -40,8 +39,7 @@ class CategoryController extends Controller
             $name = $_POST['name'];
 
             // バリデーションチェック
-            $categoryValidation = new CategoryValidation();
-            $errors = $categoryValidation->addValidation($name);
+            $errors = $this->addValidation($name);
 
             // バリデーションエラーがない場合
             if (count($errors) === 0) {
@@ -52,5 +50,22 @@ class CategoryController extends Controller
             }
         }
         require("./public/view/category_add.php");
+    }
+
+    /**
+     * @param $name
+     * @return array
+     */
+    private function addValidation($name){
+
+        $errors = [];
+
+        if (empty($name)){
+            $errors['name'] = 'カテゴリ名がありません。<br>';
+        }
+        if (mb_strlen($name) > 80){
+            $errors['name'] = 'カテゴリ名が長すぎます。<br>';
+        }
+        return $errors;
     }
 }
