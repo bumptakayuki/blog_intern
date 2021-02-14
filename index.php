@@ -7,7 +7,6 @@ require_once ('./controller/UserController.php');
 
 $request = new RequestUrl();
 $url = $request->getPathInfo();
-
 // routing
 switch ($url){
     case '/':

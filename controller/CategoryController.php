@@ -45,7 +45,7 @@ class CategoryController extends Controller
             if (count($errors) === 0) {
                 $categoryModel = new CategoryModel();
                 $categoryModel->add($name);
-                header('Location: ./');
+                header('Location: ../');
                 exit();
             }
         }

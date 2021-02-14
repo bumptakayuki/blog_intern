@@ -2,7 +2,6 @@
 ini_set('display_errors', "On");
 require_once ('Controller.php');
 require_once ('./model/PostModel.php');
-require_once('./model/PostModel.php');
 require_once('./model/CategoryModel.php');
 
 /**
@@ -53,7 +52,7 @@ class PostController extends Controller
                 // DBに登録する
                 $postModel = new PostModel();
                 $postModel->add($title, $description, $categoryId);
-                header('Location: ./');
+                header('Location: ../');
                 exit();
             }
         }
