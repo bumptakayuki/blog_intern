@@ -160,7 +160,7 @@ class UserController
 
         // 重複チェック
         $userModel = new UserModel();
-        if ($userModel->count_email($_POST) > 0) {
+        if ($userModel->countEmail($_POST) > 0) {
             $errors['email'] = 'そのメールアドレスは既に使用されています。<br>別のメールアドレスを使用してください。';
         }
 

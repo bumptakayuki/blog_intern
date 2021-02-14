@@ -30,7 +30,7 @@ ini_set('display_errors', "On");
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand" href="/blog_intern">Re:Build</a>
+        <a class="navbar-brand" href="./">Re:Build</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             Menu
             <i class="fa fa-bars"></i>
@@ -38,7 +38,7 @@ ini_set('display_errors', "On");
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/blog_intern">Home</a>
+                    <a class="nav-link" href="./">Home</a>
                 </li>
                 <li class="nav-item">
                     <div class="btn-group">
@@ -46,7 +46,7 @@ ini_set('display_errors', "On");
                             ブログ管理
                         </span>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/blog_intern/post/add">登録</a>
+                            <a class="dropdown-item" href="./post/add">登録</a>
                             <a class="dropdown-item" href="#">一覧</a>
                         </div>
                     </div>
@@ -58,13 +58,13 @@ ini_set('display_errors', "On");
                             カテゴリ管理
                         </span>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/blog_intern/category/add">登録</a>
+                            <a class="dropdown-item" href="./category/add">登録</a>
                             <a class="dropdown-item" href="#">一覧</a>
                         </div>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/blog_intern/logout">Logout</a>
+                    <a class="nav-link" href="./logout">Logout</a>
                 </li>
             </ul>
         </div>

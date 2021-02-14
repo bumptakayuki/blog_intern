@@ -53,7 +53,7 @@ class PostController extends Controller
                 // DBに登録する
                 $postModel = new PostModel();
                 $postModel->add($title, $description, $categoryId);
-                header('Location: /blog_intern');
+                header('Location: ./');
                 exit();
             }
         }
