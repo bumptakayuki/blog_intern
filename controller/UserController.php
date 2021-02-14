@@ -1,4 +1,8 @@
 <?php
+require_once('./model/UserModel.php');
+require_once('./model/UserModel.php');
+require_once('./service/validation/UserValidation.php');
+
 
 /**
  * Class UserController
@@ -17,8 +21,28 @@ class UserController
      */
     public function addAction(){
 
-        header("Location: ./public/view/user_add.php");
-        exit;
+        $errors = [];
+
+        if (@$_POST['submit']) {
+
+            $username = $_POST['username'];
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+
+            // バリデーションチェック
+            $userValidation = new UserValidation();
+            $errors = $userValidation->addValidation($username);
+
+            // バリデーションエラーがない場合
+            if (count($errors) === 0) {
+                $userModel = new UserModel();
+                $userModel->add($username, $email,$password);
+                header("Location: ../login");
+                exit();
+            }
+        }
+
+        require("./public/view/user_add.php");
     }
 
     /**
@@ -26,8 +50,28 @@ class UserController
      */
     public function loginAction(){
 
-        header("Location: ./public/view/login.php");
-        exit;
+        $errors = [];
+
+        if (!empty($_POST)) {
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+
+            // バリデーションエラーがない場合
+            if (count($errors) === 0) {
+                $userModel = new UserModel();
+                $user = $userModel->login($email, $password);
+                if(count($user) > 0){
+
+                    $_SESSION['user'] = $user;
+                    header("Location: /blog_intern");
+
+                }else{
+                    $errors[] = 'ログインに失敗しました';
+                }
+            }
+        }
+
+        require("./public/view/login.php");
     }
 
     /**
@@ -36,8 +80,6 @@ class UserController
     public function logoutAction(){
         session_destroy();
         unset($_SESSION['user']);
-        header("Location: /blog_intern/public/view/login.php");
-        exit;
+        require("./public/view/login.php");
     }
-
 }
